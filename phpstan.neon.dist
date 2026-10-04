@@ -1,0 +1,78 @@
+includes:
+    - vendor/shipmonk/phpstan-rules/rules.neon
+    - vendor/ergebnis/phpstan-rules/rules.neon
+
+# Static analysis for this package.
+#
+# The generated code analyses clean at level 10 with no baseline. If a run of this file reports
+# errors, the finding belongs upstream in the generator, not in a baseline here — the next
+# generation replaces every file it would cover.
+#
+# Copy this to `phpstan.neon` to change anything. That file wins over this one and is kept out of
+# the repository, so an adjustment survives the regeneration that overwrites everything else.
+parameters:
+    level: 10
+    checkTooWideReturnTypesInProtectedAndPublicMethods: true
+    checkMissingCallableSignature: true
+    reportPossiblyNonexistentGeneralArrayOffset: true
+    reportPossiblyNonexistentConstantArrayOffset: true
+    checkBenevolentUnionTypes: true
+    reportAnyTypeWideningInVarTag: true
+    checkUninitializedProperties: true
+    checkMissingOverrideMethodAttribute: true
+    checkExplicitMixedMissingReturn: true
+    checkFunctionNameCase: true
+    checkInternalClassCaseSensitivity: true
+    reportMaybesInMethodSignatures: true
+    reportMaybesInPropertyPhpDocTypes: true
+    reportStaticMethodSignatures: true
+    checkTooWideParameterOutInProtectedAndPublicMethods: true
+    checkTooWideThrowTypesInProtectedAndPublicMethods: true
+    checkDynamicProperties: true
+    reportAlwaysTrueInLastCondition: true
+    reportNonIntStringArrayKey: true
+    reportWrongPhpDocTypeInVarTag: true
+    shipmonkRules:
+        # Reads PHPStan's *inferred* throw types and calls a union like
+        # `Exception | RuntimeException` non-normalized because one extends the other. Over a
+        # generated exception hierarchy that is noise about types nobody wrote.
+        forbidNotNormalizedType:
+            enabled: false
+        # A `match` used as a statement is the intended shape here: it is what replaces `switch`.
+        forbidUnusedMatchResult:
+            enabled: false
+        # Callback signatures are set by whoever calls them, so a parameter unused inside one is
+        # the required form rather than an oversight.
+        forbidUnusedClosureParameters:
+            enabled: false
+        forbidCheckedExceptionInCallable:
+            enabled: false
+        # A generated operation validates while it yields; checking up front would mean
+        # materialising the very generator that exists to avoid it.
+        forbidCheckedExceptionInYieldingMethod:
+            enabled: false
+        # One variable holds one idea whose concrete node type differs per branch.
+        forbidVariableTypeOverwriting:
+            enabled: false
+        # Ask for a closure parameter type only where PHPStan cannot infer it anyway — the same
+        # line PHPStan's own rule draws.
+        enforceClosureParamNativeTypehint:
+            allowMissingTypeWhenInferred: true
+        # `(object)` on an array is how a `stdClass` for JSON is built; `(array)` and `(unset)`
+        # stay forbidden because they swallow a `null` without saying so.
+        forbidCast:
+            blacklist!: ['(array)', '(unset)']
+        # A property carrying a default is filled outside the constructor.
+        enforceReadonlyPublicProperty:
+            excludePropertyWithDefaultValue: true
+    # From ergebnis only this one: calls pass their arguments by position, never by name.
+    ergebnis:
+        allRules: false
+        noNamedArgument:
+            enabled: true
+    paths:
+        - src
+        - examples
+        - tests
+    stubFiles:
+        - phpstan/Collection.stub

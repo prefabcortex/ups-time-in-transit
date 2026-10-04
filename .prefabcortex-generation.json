@@ -1,0 +1,9 @@
+{
+    "generator": {
+        "name": "prefabcortex/openapi-php-generator",
+        "version": "2.1.1"
+    },
+    "spec": {
+        "sha256": "f750da33d3691e2e9ee45f1e768b781f3bac96e44c12487028dd9fb6c3a92451"
+    }
+}

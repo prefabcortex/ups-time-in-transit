@@ -1,0 +1,15 @@
+/vendor/
+
+# A library's lock file binds nobody: Composer resolves a dependency's requirements against
+# the consuming project, never against this file. Committing it would pin a development
+# checkout to versions no install ever sees, and hide the one thing the ranges are for.
+/composer.lock
+
+# Local answers to the shipped `.dist` configs. Each tool prefers the undotted name, so a
+# file here wins over the one in the package -- and survives the next generation, which
+# replaces everything else.
+/.php-cs-fixer.php
+/phpstan.neon
+
+.php-cs-fixer.cache
+.phpunit.cache

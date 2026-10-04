@@ -1,0 +1,30 @@
+<?php
+
+namespace Symfony\Component\Validator {
+    abstract class Constraint
+    {
+    }
+}
+
+namespace Symfony\Component\Validator\Constraints {
+    use Symfony\Component\Validator\Constraint;
+
+    abstract class Composite extends Constraint
+    {
+    }
+
+    /**
+     * A field named like a number, `"10999"`, is an int key in a PHP array and in the decoded
+     * document alike; the validator reads it either way.
+     */
+    class Collection extends Composite
+    {
+        /**
+         * @param array<array-key, Constraint|list<Constraint>>|null $fields
+         * @param string[]|null                                    $groups
+         */
+        public function __construct(?array $fields = null, ?array $groups = null, mixed $payload = null, ?bool $allowExtraFields = null, ?bool $allowMissingFields = null, ?string $extraFieldsMessage = null, ?string $missingFieldsMessage = null)
+        {
+        }
+    }
+}

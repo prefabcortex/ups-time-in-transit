@@ -1,0 +1,67 @@
+{
+    "name": "prefabcortex/ups-time-in-transit",
+    "description": "Unofficial PHP client for Time In Transit \u2014 The Time In Transit API provides estimated delivery times for various UPS shipping services, between specified locations",
+    "type": "library",
+    "keywords": [
+        "openapi",
+        "api-client",
+        "rest",
+        "sdk",
+        "ups",
+        "time",
+        "in",
+        "transit"
+    ],
+    "homepage": "https://github.com/prefabcortex/ups-time-in-transit",
+    "license": "0BSD",
+    "authors": [
+        {
+            "name": "Dominic Bla\u00df"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/prefabcortex/ups-time-in-transit/issues",
+        "source": "https://github.com/prefabcortex/ups-time-in-transit"
+    },
+    "require": {
+        "php": "^8.4",
+        "ext-json": "*",
+        "nyholm/psr7": "^1.8.2",
+        "psr/http-client": "^1.0",
+        "psr/http-client-implementation": "^1.0",
+        "psr/http-factory": "^1.1",
+        "psr/http-message": "^1.0 || ^2.0",
+        "symfony/validator": "^7.4 || ^8.0"
+    },
+    "conflict": {
+        "symfony/translation-contracts": "<3.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Prefabcortex\\UpsTimeInTransit\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Prefabcortex\\UpsTimeInTransit\\Examples\\": "examples/",
+            "Prefabcortex\\UpsTimeInTransit\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "ergebnis/phpstan-rules": "^2.14",
+        "friendsofphp/php-cs-fixer": "^3.95",
+        "phpstan/phpstan": "^2.2",
+        "phpunit/phpunit": "^13.3",
+        "psr/log": "^3.0",
+        "roave/backward-compatibility-check": "^8.22",
+        "shipmonk/phpstan-rules": "^4.4",
+        "symfony/http-client": "^7.4 || ^8.0"
+    },
+    "scripts": {
+        "test": "phpunit",
+        "analyse": "phpstan analyse --memory-limit=-1",
+        "cs-check": "php-cs-fixer check",
+        "cs-fix": "php-cs-fixer fix",
+        "bc-check": "roave-backward-compatibility-check"
+    }
+}
